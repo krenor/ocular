@@ -1,14 +1,25 @@
+os: linux
+dist: focal
 language: php
 
 php:
-  - 7.3
-  - 7.4
   - 8.0
 
+env:
+  jobs:
+    - COMPOSER_UPDATE_FLAGS="--no-interaction --no-suggest"
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  - travis_retry composer self-update
+
 before_script:
-  - composer self-update
-  - composer install
+  - travis_retry composer update ${COMPOSER_UPDATE_FLAGS}
   - git config --global user.email "scrutinizer-ci@github.com"
   - git config --global user.name "Scrutinizer-CI"
 
-script: phpunit
+script:
+  - vendor/bin/phpunit

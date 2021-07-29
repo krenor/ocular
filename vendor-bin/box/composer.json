@@ -1,5 +1,6 @@
 {
     "require-dev": {
-        "humbug/box": "^3.8"
-    }
+        "humbug/box": "^3.13"
+    },
+    "minimum-stability": "dev"
 }
